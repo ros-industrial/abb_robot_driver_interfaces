@@ -33,7 +33,7 @@ Orient rot
 # This is defined in the form of the current quarter
 # revolution of axis 1, axis 4, and axis 6.
 #
-# The first positive quarter revolution 0 to 90° is defined as 0.
+# The first positive quarter revolution 0 to 90 degrees is defined as 0.
 #
 # The meaning of the component cfx is dependent on robot type.
 ConfData robconf
