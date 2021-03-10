@@ -11,7 +11,7 @@
 #-------------------------------------------------------------------------------
 # Message fields
 #-------------------------------------------------------------------------------
-# The position of the external logical axis “a”-"f",
+# The position of the external logical axis "a"-"f",
 # expressed in degrees or mm (depending on the type of axis).
 float32 eax_a
 float32 eax_b
