@@ -2,8 +2,8 @@
 Changelog for package abb_rapid_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.5.1 (2021-03-30)
+------------------
 * Remove non-ASCII characters from message comments (`#9 <https://github.com/ros-industrial/abb_robot_driver_interfaces/issues/9>`_)
 * Contributors: gavanderhoorn
 
