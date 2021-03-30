@@ -11,36 +11,35 @@ on:
 
 jobs:
   industrial_ci:
+    name: ROS Melodic (${{ matrix.ros_repo }})
+    runs-on: ubuntu-20.04
+
     strategy:
       matrix:
-        env:
-          - {ROS_DISTRO: melodic, ROS_REPO: testing}
-          - {ROS_DISTRO: melodic, ROS_REPO: main}
-    name: ROS Melodic (${{ matrix.env.ROS_REPO }})
-    # industrial_ci uses Docker, so we don't need a specific Ubuntu version
-    runs-on: ubuntu-latest
+        ros_distro: [ melodic ]
+        ros_repo: [ main, testing ]
+
     env:
-      CI_NAME: Ubuntu Bionic
-      OS_NAME: ubuntu
-      OS_CODE_NAME: bionic
-      CCACHE_DIR: "/home/runner/work/abb_robot_driver_interfaces/abb_robot_driver_interfaces/bionic/.ccache"
+      CCACHE_DIR: "${{ github.workspace }}/.ccache"
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Fetch repository
+        uses: actions/checkout@v2
 
-      - name: Prepare ccache timestamp
-        id: ccache_cache_timestamp
-        shell: cmake -P {0}
-        run: |
-          string(TIMESTAMP current_date "%Y-%m-%d-%H;%M;%S" UTC)
-          message("::set-output name=timestamp::${current_date}")
-
-      - name: ccache cache files
+      - name: ccache cache
         uses: actions/cache@v2
         with:
-          path: ${{ env.OS_CODE_NAME }}/.ccache
-          key: ${{ env.OS_CODE_NAME }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
+          path: ${{ env.CCACHE_DIR }}
+          # we always want the ccache cache to be persisted, as we cannot easily
+          # determine whether dependencies have changed, and ccache will manage
+          # updating the cache for us. Adding 'run_id' to the key will force an
+          # upload at the end of the job.
+          key: ccache-${{ matrix.ros_distro }}-${{ matrix.ros_repo }}-${{github.run_id}}
           restore-keys: |
-            ${{ env.OS_CODE_NAME }}-ccache-
+            ccache-${{ matrix.ros_distro }}-${{ matrix.ros_repo }}
 
-      - uses: 'ros-industrial/industrial_ci@master'
-        env: ${{matrix.env}}
+      - name: Run industrial_ci
+        uses: ros-industrial/industrial_ci@master
+        env:
+          ROS_DISTRO: ${{ matrix.ros_distro }}
+          ROS_REPO: ${{ matrix.ros_repo }}
