@@ -2,8 +2,8 @@
 Changelog for package abb_rapid_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.5.2 (2021-04-02)
+------------------
 * Install readme and license (`#12 <https://github.com/ros-industrial/abb_robot_driver_interfaces/issues/12>`_)
 * Contributors: gavanderhoorn
 
