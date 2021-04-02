@@ -84,3 +84,14 @@ catkin_package(
     message_runtime
     std_msgs
 )
+
+#===========================================================
+# Install additional files
+#===========================================================
+install(
+  FILES
+    LICENSE
+    README.md
+  DESTINATION
+    ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
