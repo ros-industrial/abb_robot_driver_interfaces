@@ -2,6 +2,11 @@
 Changelog for package abb_rapid_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.5.2 (2021-04-02)
+------------------
+* Install readme and license (`#12 <https://github.com/ros-industrial/abb_robot_driver_interfaces/issues/12>`_)
+* Contributors: gavanderhoorn
+
 0.5.1 (2021-03-30)
 ------------------
 * Remove non-ASCII characters from message comments (`#9 <https://github.com/ros-industrial/abb_robot_driver_interfaces/issues/9>`_)
