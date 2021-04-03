@@ -2,8 +2,8 @@
 Changelog for package abb_robot_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.5.3 (2021-04-03)
+------------------
 * Lower minimum required CMake version to solve build error on Kinetic (`#14 <https://github.com/ros-industrial/abb_robot_driver_interfaces/issues/14>`_)
 * Contributors: gavanderhoorn
 
