@@ -17,7 +17,7 @@
 # including program displacement.
 #
 # If no work object is specified then this is the world coordinate system.
-Pos trans
+abb_rapid_msgs/Pos trans
 
 # The orientation of the tool, expressed in the
 # form of a quaternion (q1, q2, q3, and q4).
@@ -26,7 +26,7 @@ Pos trans
 # object coordinate system including program displacement.
 #
 # If no work object is specified then this is the world coordinate system.
-Orient rot
+abb_rapid_msgs/Orient rot
 
 # The axis configuration of the robot (cf1, cf4, cf6, and cfx).
 #
@@ -36,7 +36,7 @@ Orient rot
 # The first positive quarter revolution 0 to 90 degrees is defined as 0.
 #
 # The meaning of the component cfx is dependent on robot type.
-ConfData robconf
+abb_rapid_msgs/ConfData robconf
 
 # The position of the additional axes.
-ExtJoint extax
+abb_rapid_msgs/ExtJoint extax

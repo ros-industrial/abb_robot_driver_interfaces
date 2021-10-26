@@ -15,13 +15,13 @@ bool allow_egm_motions
 bool use_presync
 
 # Settings for EGMSetupUC instructions.
-EGMSetupSettings setup_uc
+abb_rapid_sm_addin_msgs/EGMSetupSettings setup_uc
 
 # Settings for EGMAct instructions.
-EGMActivateSettings activate
+abb_rapid_sm_addin_msgs/EGMActivateSettings activate
 
 # Settings for EGMRun instructions.
-EGMRunSettings run
+abb_rapid_sm_addin_msgs/EGMRunSettings run
 
 # Settings for EGMStop instructions.
-EGMStopSettings stop
+abb_rapid_sm_addin_msgs/EGMStopSettings stop

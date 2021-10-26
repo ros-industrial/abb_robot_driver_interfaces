@@ -35,8 +35,8 @@ string ufmec
 
 # The user coordinate system, i.e. the position
 # of the current work surface or fixture.
-Pose uframe
+abb_rapid_msgs/Pose uframe
 
 # The object coordinate system, i.e. the position
 # of the current work object.
-Pose oframe
+abb_rapid_msgs/Pose oframe

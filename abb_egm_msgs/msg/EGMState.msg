@@ -11,4 +11,4 @@
 std_msgs/Header header
 
 # EGM channel states.
-EGMChannelState[] egm_channels
+abb_egm_msgs/EGMChannelState[] egm_channels

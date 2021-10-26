@@ -20,7 +20,7 @@ bool auto_mode
 bool rapid_running
 
 # RAPID task states.
-RAPIDTaskState[] rapid_tasks
+abb_robot_msgs/RAPIDTaskState[] rapid_tasks
 
 # Mechanical unit states.
-MechanicalUnitState[] mechanical_units
+abb_robot_msgs/MechanicalUnitState[] mechanical_units

@@ -12,7 +12,7 @@
 # Service request fields
 #-------------------------------------------------------------------------------
 # Path to the targeted RAPID symbol.
-RAPIDSymbolPath path
+abb_robot_msgs/RAPIDSymbolPath path
 
 ---
 

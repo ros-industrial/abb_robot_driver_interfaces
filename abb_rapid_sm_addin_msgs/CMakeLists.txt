@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 
 ########################################################################################################################
 # Metadata
@@ -25,64 +25,43 @@ endif()
 ########################################################################################################################
 project(${extracted_name} VERSION ${extracted_version})
 
-#===========================================================
-# Dependencies
-#===========================================================
-#-----------------------------
-# Catkin packages
-#-----------------------------
-find_package(catkin
-  REQUIRED COMPONENTS
-    abb_rapid_msgs
-    message_generation
-    std_msgs
+if (NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if (CMAKE_COMPILER_IS_GNUXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(abb_rapid_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+
+set(MSG_FILES
+  "msg/EGMActivateSettings.msg"
+  "msg/EGMRunSettings.msg"
+  "msg/EGMSettings.msg"
+  "msg/EGMSetupSettings.msg"
+  "msg/EGMStopSettings.msg"
+  "msg/RuntimeState.msg"
+  "msg/StateMachineState.msg"
 )
 
-#===========================================================
-# Generate ROS interfaces
-#===========================================================
-add_message_files(
-  FILES
-    EGMActivateSettings.msg
-    EGMRunSettings.msg
-    EGMSettings.msg
-    EGMSetupSettings.msg
-    EGMStopSettings.msg
-    RuntimeState.msg
-    StateMachineState.msg
+set(SRV_FILES
+  "srv/GetEGMSettings.srv"
+  "srv/SetEGMSettings.srv"
+  "srv/SetRAPIDRoutine.srv"
+  "srv/SetSGCommand.srv"
 )
 
-add_service_files(
-  FILES
-    GetEGMSettings.srv
-    SetEGMSettings.srv
-    SetRAPIDRoutine.srv
-    SetSGCommand.srv
-)
 
-generate_messages(
-  DEPENDENCIES
-    abb_rapid_msgs
-    std_msgs
-)
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${MSG_FILES}
+  ${SRV_FILES}
+  DEPENDENCIES abb_rapid_msgs std_msgs
+  ADD_LINTER_TESTS
+ )
 
-#===========================================================
-# Catkin package specific configurations
-#===========================================================
-catkin_package(
-  CATKIN_DEPENDS
-    abb_rapid_msgs
-    message_runtime
-    std_msgs
-)
-
-#===========================================================
-# Install additional files
-#===========================================================
-install(
-  FILES
-    LICENSE
-    README.md
-  DESTINATION
-    ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+ament_export_dependencies(rosidl_default_generators)
+ament_package()
