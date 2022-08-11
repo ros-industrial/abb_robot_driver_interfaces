@@ -15,25 +15,21 @@ jobs:
         env:
           - ROS_DISTRO: rolling
             ROS_REPO: main
-            CCOV: true
     env:
       BEFORE_SETUP_UPSTREAM_WORKSPACE: 'sudo apt-get -qq install -y --no-upgrade --no-install-recommends git && git config --global --add safe.directory "*"'
-      AFTER_RUN_TARGET_TEST: ${{ matrix.env.CCOV && './.ci.prepare_codecov' || '' }}
       TARGET_CMAKE_ARGS: >
-        -DCMAKE_BUILD_TYPE=${{ matrix.env.CCOV && 'Debug' || 'Release'}}
-        ${{ matrix.env.CCOV && '-DCMAKE_CXX_FLAGS="--coverage" --no-warn-unused-cli' || '' }}
+        -DCMAKE_BUILD_TYPE='Release'
       CCACHE_DIR: ${{ github.workspace }}/.ccache
       BASEDIR: ${{ github.workspace }}/.work
-      CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.CCOV && '-ccov' || '' }}
+      CACHE_PREFIX: ${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}
 
-    name: "${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}${{ matrix.env.CCOV && ' + ccov' || ''}}"
+    name: "${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ROS_REPO }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       # The target directory cache doesn't include the source directory because
       # that comes from the checkout.  See "prepare target_ws for cache" task below
       - name: cache target_ws
-        if: ${{ ! matrix.env.CCOV }}
         uses: pat-s/always-upload-cache@v2.1.5
         with:
           path: ${{ env.BASEDIR }}/target_ws
@@ -51,19 +47,8 @@ jobs:
       - name: industrial_ci
         uses: "ros-industrial/industrial_ci@master"
         env: ${{ matrix.env }}
-      - name: upload test artifacts (on failure)
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: test-results
-          path: ${{ env.BASEDIR }}/target_ws/**/test_results/**/*.xml
-      - name: upload codecov report
-        uses: codecov/codecov-action@v1
-        if: ${{ matrix.env.CCOV }}
-        with:
-          files: ${{ env.BASEDIR }}/coverage.info
       - name: prepare target_ws for cache
-        if: ${{ always() && ! matrix.env.CCOV }}
+        if: ${{ always()}}
         run: |
           du -sh ${{ env.BASEDIR }}/target_ws
           sudo find ${{ env.BASEDIR }}/target_ws -wholename '*/test_results/*' -delete
