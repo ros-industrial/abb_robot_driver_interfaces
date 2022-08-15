@@ -1,7 +1,5 @@
 # abb_robot_driver_interfaces
 
-![CI - Ubuntu Bionic](https://github.com/ros-industrial/abb_robot_driver_interfaces/workflows/CI%20-%20Ubuntu%20Bionic/badge.svg)
-![CI - Ubuntu Focal](https://github.com/ros-industrial/abb_robot_driver_interfaces/workflows/CI%20-%20Ubuntu%20Focal/badge.svg)
 [![Github Issues](https://img.shields.io/github/issues/ros-industrial/abb_robot_driver_interfaces.svg)](http://github.com/ros-industrial/abb_robot_driver_interfaces/issues)
 
 [![license - bsd 3 clause](https://img.shields.io/:license-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
@@ -13,7 +11,7 @@
 
 ## Overview
 
-ROS packages with ROS message and service definitions, intended for use with [abb_robot_driver](https://github.com/ros-industrial/abb_robot_driver).
+ROS2 packages with ROS message and service definitions, intended for use with [abb_ros2](https://github.com/PickNikRobotics/abb_ros2).
 
 The included packages are briefly described in the following table:
 
@@ -24,7 +22,7 @@ The included packages are briefly described in the following table:
 | [abb_egm_msgs](abb_egm_msgs) | ROS message definitions representing data related to *Externally Guided Motion* (`EGM`) communication channels. |
 | [abb_rapid_sm_addin_msgs](abb_rapid_sm_addin_msgs) | ROS message and service definitions representing interaction with `RAPID` program instances of the `RobotWare` [StateMachine Add-In](https://robotapps.robotstudio.com/#/viewApp/c163de01-792e-4892-a290-37dbe050b6e1):<br><ul><li>Reading runtime states of the `RAPID` program instances (*i.e. the state machines*).</li><li>Starting and stopping `EGM` communication sessions.</li><li>Reading and writing of `EGM` `RAPID` settings.</li><li>Opening/closing `SmartGripper` fingers.</li><li>And more.</li></ul> |
 
-Please see [abb_robot_driver](https://github.com/ros-industrial/abb_robot_driver) for more details.
+Please see [abb_ros2](https://github.com/PickNikRobotics/abb_ros2) for more details.
 
 ## Acknowledgements
 

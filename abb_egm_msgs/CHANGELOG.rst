@@ -2,10 +2,10 @@
 Changelog for package abb_egm_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.0.0 (2021-10-26)
+1.0.0 (2022-08-15)
 ------------------
-* Migrated package from ROS1 to ROS2 Galactic
-* Contributors: Souphis
+* Migrated package from ROS1 to ROS2
+* Contributors: gbartyzel
 
 0.5.3 (2021-04-03)
 ------------------
