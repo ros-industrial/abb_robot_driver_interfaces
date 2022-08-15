@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 
 ########################################################################################################################
 # Metadata
@@ -25,52 +25,33 @@ endif()
 ########################################################################################################################
 project(${extracted_name} VERSION ${extracted_version})
 
-#===========================================================
-# Dependencies
-#===========================================================
-#-----------------------------
-# Catkin packages
-#-----------------------------
-find_package(catkin
-  REQUIRED COMPONENTS
-    message_generation
+if (NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if (CMAKE_COMPILER_IS_GNUXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(rosidl_default_generators REQUIRED)
+
+set(MSG_FILES
+  "msg/ConfData.msg"
+  "msg/ExtJoint.msg"
+  "msg/JointTarget.msg"
+  "msg/LoadData.msg"
+  "msg/Orient.msg"
+  "msg/Pos.msg"
+  "msg/Pose.msg"
+  "msg/RobJoint.msg"
+  "msg/RobTarget.msg"
+  "msg/ToolData.msg"
+  "msg/WObjData.msg"
 )
 
-#===========================================================
-# Generate ROS interfaces
-#===========================================================
-add_message_files(
-  FILES
-    ConfData.msg
-    ExtJoint.msg
-    JointTarget.msg
-    LoadData.msg
-    Orient.msg
-    Pos.msg
-    Pose.msg
-    RobJoint.msg
-    RobTarget.msg
-    ToolData.msg
-    WObjData.msg
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${MSG_FILES}
 )
 
-generate_messages()
-
-#===========================================================
-# Catkin package specific configurations
-#===========================================================
-catkin_package(
-  CATKIN_DEPENDS
-    message_runtime
-)
-
-#===========================================================
-# Install additional files
-#===========================================================
-install(
-  FILES
-    LICENSE
-    README.md
-  DESTINATION
-    ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+ament_export_dependencies(rosidl_default_generators)
+ament_package()

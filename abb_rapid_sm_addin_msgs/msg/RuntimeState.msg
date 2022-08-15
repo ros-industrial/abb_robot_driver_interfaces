@@ -11,4 +11,4 @@
 std_msgs/Header header
 
 # "StateMachine Add-In" instances.
-StateMachineState[] state_machines
+abb_rapid_sm_addin_msgs/StateMachineState[] state_machines

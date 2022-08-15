@@ -15,7 +15,7 @@
 string task
 
 # New settings to use for RAPID EGM instructions.
-EGMSettings settings
+abb_rapid_sm_addin_msgs/EGMSettings settings
 
 ---
 

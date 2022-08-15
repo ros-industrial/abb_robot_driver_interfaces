@@ -21,8 +21,8 @@ bool robhold
 #   expressed in the wrist coordinate system (tool0).
 # - The orientation of the tool coordinate system,
 #   expressed in the wrist coordinate system.
-Pose tframe
+abb_rapid_msgs/Pose tframe
 
 # The load of the tool (if robot held tool).
 # The load of the gripper holding the work object (if stationary tool).
-LoadData tload
+abb_rapid_msgs/LoadData tload

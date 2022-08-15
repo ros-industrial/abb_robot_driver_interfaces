@@ -12,7 +12,7 @@
 # Message fields
 #-------------------------------------------------------------------------------
 # The displacement in position (x, y, and z) of the coordinate system.
-Pos trans
+abb_rapid_msgs/Pos trans
 
 # The rotation of the coordinate system.
-Orient rot
+abb_rapid_msgs/Orient rot

@@ -20,7 +20,7 @@ float32 mass
 # If a stationary tool is used then the center of gravity for the payload
 # held by the gripper is expressed in the object frame of the work object
 # coordinate system moved by the robot.
-Pos cog
+abb_rapid_msgs/Pos cog
 
 # The orientation of the axes of moment.
 #
@@ -29,7 +29,7 @@ Pos cog
 #
 # If the robot is holding the tool, the axes of moment
 # are expressed in the tool coordinate system.
-Orient aom
+abb_rapid_msgs/Orient aom
 
 # The moment of inertia of the load around the x-, y- and z-axis,
 # expressed in kgm^2.

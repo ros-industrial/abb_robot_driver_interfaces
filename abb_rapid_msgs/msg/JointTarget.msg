@@ -12,7 +12,7 @@
 # Message fields
 #-------------------------------------------------------------------------------
 # Axis positions of the robot axes in degrees.
-RobJoint robax
+abb_rapid_msgs/RobJoint robax
 
 # The position of the external axes.
-ExtJoint extax
+abb_rapid_msgs/ExtJoint extax

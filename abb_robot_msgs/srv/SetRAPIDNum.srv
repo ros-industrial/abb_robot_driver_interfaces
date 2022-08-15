@@ -9,7 +9,7 @@
 # Service request fields
 #-------------------------------------------------------------------------------
 # Path to the targeted RAPID symbol.
-RAPIDSymbolPath path
+abb_robot_msgs/RAPIDSymbolPath path
 
 # New value of the RAPID symbol.
 float32 value

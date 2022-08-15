@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 
 ########################################################################################################################
 # Metadata
@@ -25,73 +25,59 @@ endif()
 ########################################################################################################################
 project(${extracted_name} VERSION ${extracted_version})
 
-#===========================================================
-# Dependencies
-#===========================================================
-#-----------------------------
-# Catkin packages
-#-----------------------------
-find_package(catkin
-  REQUIRED COMPONENTS
-    message_generation
-    std_msgs
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+
+set(MSG_FILES
+  "msg/MechanicalUnitState.msg"
+  "msg/RAPIDSymbolPath.msg"
+  "msg/RAPIDTaskState.msg"
+  "msg/ServiceResponses.msg"
+  "msg/SystemState.msg"
 )
 
-#===========================================================
-# Generate ROS interfaces
-#===========================================================
-add_message_files(
-  FILES
-    MechanicalUnitState.msg
-    RAPIDSymbolPath.msg
-    RAPIDTaskState.msg
-    ServiceResponses.msg
-    SystemState.msg
+set(SRV_FILES
+  "srv/GetFileContents.srv"
+  "srv/GetIOSignal.srv"
+  "srv/GetRAPIDBool.srv"
+  "srv/GetRAPIDDnum.srv"
+  "srv/GetRAPIDNum.srv"
+  "srv/GetRAPIDString.srv"
+  "srv/GetRAPIDSymbol.srv"
+  "srv/GetRobotControllerDescription.srv"
+  "srv/GetSpeedRatio.srv"
+  "srv/SetFileContents.srv"
+  "srv/SetIOSignal.srv"
+  "srv/SetRAPIDBool.srv"
+  "srv/SetRAPIDDnum.srv"
+  "srv/SetRAPIDNum.srv"
+  "srv/SetRAPIDString.srv"
+  "srv/SetRAPIDSymbol.srv"
+  "srv/SetSpeedRatio.srv"
+  "srv/TriggerWithResultCode.srv"
 )
 
-add_service_files(
-  FILES
-    GetFileContents.srv
-    GetIOSignal.srv
-    GetRAPIDBool.srv
-    GetRAPIDDnum.srv
-    GetRAPIDNum.srv
-    GetRAPIDString.srv
-    GetRAPIDSymbol.srv
-    GetRobotControllerDescription.srv
-    GetSpeedRatio.srv
-    SetFileContents.srv
-    SetIOSignal.srv
-    SetRAPIDBool.srv
-    SetRAPIDDnum.srv
-    SetRAPIDNum.srv
-    SetRAPIDString.srv
-    SetRAPIDSymbol.srv
-    SetSpeedRatio.srv
-    TriggerWithResultCode.srv
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${MSG_FILES}
+  ${SRV_FILES}
+  DEPENDENCIES std_msgs
+  ADD_LINTER_TESTS
 )
+ament_export_dependencies(rosidl_default_runtime)
 
-generate_messages(
-  DEPENDENCIES
-    std_msgs
-)
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+endif()
 
-#===========================================================
-# Catkin package specific configurations
-#===========================================================
-catkin_package(
-  CATKIN_DEPENDS
-    message_runtime
-    std_msgs
-)
-
-#===========================================================
-# Install additional files
-#===========================================================
-install(
-  FILES
-    LICENSE
-    README.md
-  DESTINATION
-    ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+ament_package()

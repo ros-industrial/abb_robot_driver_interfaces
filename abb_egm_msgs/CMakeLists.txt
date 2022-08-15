@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 
 ########################################################################################################################
 # Metadata
@@ -25,48 +25,23 @@ endif()
 ########################################################################################################################
 project(${extracted_name} VERSION ${extracted_version})
 
-#===========================================================
-# Dependencies
-#===========================================================
-#-----------------------------
-# Catkin packages
-#-----------------------------
-find_package(catkin
-  REQUIRED COMPONENTS
-    message_generation
-    std_msgs
-)
+if (NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
-#===========================================================
-# Generate ROS interfaces
-#===========================================================
-add_message_files(
-  FILES
-    EGMChannelState.msg
-    EGMState.msg
-)
+if (CMAKE_COMPILER_IS_GNUXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-generate_messages(
-  DEPENDENCIES
-    std_msgs
-)
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
 
-#===========================================================
-# Catkin package specific configurations
-#===========================================================
-catkin_package(
-  CATKIN_DEPENDS
-    message_runtime
-    std_msgs
-)
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/EGMChannelState.msg"
+  "msg/EGMState.msg"
+  DEPENDENCIES std_msgs
+ )
 
-#===========================================================
-# Install additional files
-#===========================================================
-install(
-  FILES
-    LICENSE
-    README.md
-  DESTINATION
-    ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+ament_export_dependencies(rosidl_default_generators)
+ament_package()

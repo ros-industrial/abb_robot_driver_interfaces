@@ -20,7 +20,7 @@ string task
 # Service response fields
 #-------------------------------------------------------------------------------
 # The settings used for RAPID EGM instructions.
-EGMSettings settings
+abb_rapid_sm_addin_msgs/EGMSettings settings
 
 # Service success/failure indicator.
 # Refer to 'abb_robot_msgs/ServiceResponses' for defined error codes.
